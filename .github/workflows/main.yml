@@ -19,9 +19,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install ffmpeg curl rar python3 atomicparsley aria2 -y
-          curl -LJO https://github.com/ytdl-org/youtube-dl/releases/latest/download/youtube-dl
-          chmod +x ./youtube-dl
-          ./youtube-dl --config-location dl.conf
+          sudo curl -LJO https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
+          sudo chmod +x ./yt-dlp
+          ./yt-dlp --config-location dl.conf
           python3 ./deal_download_files.py
 
 
