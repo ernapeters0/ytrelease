@@ -1,37 +1,145 @@
-最初这个项目是 https://github.com/hw431/github-actions-youtube-dl 的一个 fork ，但是原项目大量代码不符合本项目的预期，所以做了大量的重构，现在除了目录结构相符外，其他大部分都已经和以前不一样了。
+# Project X
 
-# 说明
+[Project X](https://github.com/XTLS) originates from XTLS protocol, providing a set of network tools such as [Xray-core](https://github.com/XTLS/Xray-core) and [REALITY](https://github.com/XTLS/REALITY).
 
-使用 Github Actions 从 Youtube 下载视频并放到 Release
+[README](https://github.com/XTLS/Xray-core#readme) is open, so feel free to submit your project [here](https://github.com/XTLS/Xray-core/pulls).
 
-# 使用
+## Donation & NFTs
 
-Fork 这个仓库并将 dl.conf 修改为你需要下载的视频的 URL，一个 URL 占一行。修改后提交，然后在 Github actions 里查看下载情况，每次 push 会创建一个 action。
+[Announcement of NFTs by Project X](https://github.com/XTLS/Xray-core/discussions/3633)
 
-一次下载的视频总大小不得超过 14GB。
+## License
 
-如果你只需要下载字幕，可以手动将 dl.conf 中的 `--write-auto-sub` 取消注释。 
+[Mozilla Public License Version 2.0](https://github.com/XTLS/Xray-core/blob/main/LICENSE)
 
-每个下载的视频都会被分卷为大小不超过 1.5 G 的压缩包内（Github 限制是 2GB） 。使用压缩包对于视频而言可能反而会导致体积增大，但是为了 actions 上传文件时会更改文件名，因此使用压缩很有必要。
+## Documentation
 
-# 注意
+[Project X Official Website](https://xtls.github.io)
 
-1. 如果你已经下载完视频了，不要忘记把 realses 中的视频给删掉。请 *善意* 使用 Github 给出的免费空间。
-2. 视频的下载和字幕的下载是分离的，action 会尝试下载所有可用的字幕文件并打包在 sub.rar 文件中。如果没有字幕文件，会创建一个 64B 大小的空 rar 文件
-3. Release 文件的上传是分多次的，所以你接受到邮件的时候文件可能还没有上传完，最好等到 action 结束再去下载
-3. Release 文件的上传是分多次的，所以你接受到邮件的时候文件可能还没有上传完，最好等到 action 结束再去下载
-4. 目前而言，在下载 youtube 视频的时候速度很可观，但是在从 P 站下载一些视频的时候速度比较慢。所有采用了 youtube-dl + aria2 下载的形式。但是对于一些网站而言，可以禁止使用多线程下载，此种情况下，可以将 `dl.conf` 的 `--external-downloader aria2c` 这一行注释掉。
-5. 如果你想要使用 ffmpeg 将视频和字幕合成，那么你需要将字幕文件修改成下面这种形式：（字幕编码为 UTF-8 without BOM）
+## Telegram
 
+[Project X](https://t.me/projectXray)
+
+[Project X Channel](https://t.me/projectXtls)
+
+[Project VLESS](https://t.me/projectVless) (non-Chinese)
+
+## Installation
+
+- Linux Script
+  - [XTLS/Xray-install](https://github.com/XTLS/Xray-install) (**Official**)
+  - [tempest](https://github.com/team-cloudchaser/tempest) (supports [`systemd`](https://systemd.io) and [OpenRC](https://github.com/OpenRC/openrc); Linux-only)
+- Docker
+  - [ghcr.io/xtls/xray-core](https://ghcr.io/xtls/xray-core) (**Official**)
+  - [teddysun/xray](https://hub.docker.com/r/teddysun/xray)
+- Web Panel
+  - [3X-UI](https://github.com/MHSanaei/3x-ui), [X-UI](https://github.com/alireza0/x-ui), [Xray-UI](https://github.com/qist/xray-ui)
+  - [Hiddify](https://github.com/hiddify/hiddify-config)
+  - [Marzban](https://github.com/Gozargah/Marzban)
+  - [Libertea](https://github.com/VZiChoushaDui/Libertea)
+- One Click
+  - [Xray-REALITY](https://github.com/zxcvos/Xray-script), [xray-reality](https://github.com/sajjaddg/xray-reality), [reality-ezpz](https://github.com/aleskxyz/reality-ezpz)
+  - [Xray_bash_onekey](https://github.com/hello-yunshu/Xray_bash_onekey), [XTool](https://github.com/LordPenguin666/XTool)
+  - [v2ray-agent](https://github.com/mack-a/v2ray-agent), [Xray_onekey](https://github.com/wulabing/Xray_onekey), [ProxySU](https://github.com/proxysu/ProxySU)
+- Magisk
+  - [Xray4Magisk](https://github.com/Asterisk4Magisk/Xray4Magisk)
+  - [Xray_For_Magisk](https://github.com/E7KMbb/Xray_For_Magisk)
+- Homebrew
+  - `brew install xray`
+
+## Usage
+
+- Example
+  - [VLESS-XTLS-uTLS-REALITY](https://github.com/XTLS/REALITY#readme)
+  - [VLESS-TCP-XTLS-Vision](https://github.com/XTLS/Xray-examples/tree/main/VLESS-TCP-XTLS-Vision)
+  - [All-in-One-fallbacks-Nginx](https://github.com/XTLS/Xray-examples/tree/main/All-in-One-fallbacks-Nginx)
+- Xray-examples
+  - [XTLS/Xray-examples](https://github.com/XTLS/Xray-examples)
+  - [chika0801/Xray-examples](https://github.com/chika0801/Xray-examples)
+  - [lxhao61/integrated-examples](https://github.com/lxhao61/integrated-examples)
+- Tutorial
+  - [XTLS Vision](https://github.com/chika0801/Xray-install)
+  - [REALITY (English)](https://cscot.pages.dev/2023/03/02/Xray-REALITY-tutorial/)
+  - [XTLS-Iran-Reality (English)](https://github.com/SasukeFreestyle/XTLS-Iran-Reality)
+  - [Xray REALITY with 'steal oneself' (English)](https://computerscot.github.io/vless-xtls-utls-reality-steal-oneself.html)
+  - [Xray with WireGuard inbound (English)](https://g800.pages.dev/wireguard)
+
+## GUI Clients
+
+- OpenWrt
+  - [PassWall](https://github.com/xiaorouji/openwrt-passwall), [PassWall 2](https://github.com/xiaorouji/openwrt-passwall2)
+  - [ShadowSocksR Plus+](https://github.com/fw876/helloworld)
+  - [luci-app-xray](https://github.com/yichya/luci-app-xray) ([openwrt-xray](https://github.com/yichya/openwrt-xray))
+- Windows
+  - [v2rayN](https://github.com/2dust/v2rayN)
+  - [Furious](https://github.com/LorenEteval/Furious)
+  - [Invisible Man - Xray](https://github.com/InvisibleManVPN/InvisibleMan-XRayClient)
+- Android
+  - [v2rayNG](https://github.com/2dust/v2rayNG)
+  - [X-flutter](https://github.com/XTLS/X-flutter)
+  - [SaeedDev94/Xray](https://github.com/SaeedDev94/Xray)
+- iOS & macOS arm64
+  - [FoXray](https://apps.apple.com/app/foxray/id6448898396)
+  - [Streisand](https://apps.apple.com/app/streisand/id6450534064)
+- macOS arm64 & x64
+  - [V2rayU](https://github.com/yanue/V2rayU)
+  - [V2RayXS](https://github.com/tzmax/V2RayXS)
+  - [Furious](https://github.com/LorenEteval/Furious)
+  - [FoXray](https://apps.apple.com/app/foxray/id6448898396)
+- Linux
+  - [v2rayA](https://github.com/v2rayA/v2rayA)
+  - [Furious](https://github.com/LorenEteval/Furious)
+
+## Others that support VLESS, XTLS, REALITY, XUDP, PLUX...
+
+- iOS & macOS arm64
+  - [Shadowrocket](https://apps.apple.com/app/shadowrocket/id932747118)
+- Xray Tools
+  - [xray-knife](https://github.com/lilendian0x00/xray-knife)
+- Xray Wrapper
+  - [XTLS/libXray](https://github.com/XTLS/libXray)
+  - [xtlsapi](https://github.com/hiddify/xtlsapi)
+  - [AndroidLibXrayLite](https://github.com/2dust/AndroidLibXrayLite)
+  - [Xray-core-python](https://github.com/LorenEteval/Xray-core-python)
+  - [xray-api](https://github.com/XVGuardian/xray-api)
+- [XrayR](https://github.com/XrayR-project/XrayR)
+  - [XrayR-release](https://github.com/XrayR-project/XrayR-release)
+  - [XrayR-V2Board](https://github.com/missuo/XrayR-V2Board)
+- [Clash.Meta](https://github.com/MetaCubeX/Clash.Meta)
+  - [clashN](https://github.com/2dust/clashN)
+  - [Clash Meta for Android](https://github.com/MetaCubeX/ClashMetaForAndroid)
+- [sing-box](https://github.com/SagerNet/sing-box)
+
+## Contributing
+
+[Code of Conduct](https://github.com/XTLS/Xray-core/blob/main/CODE_OF_CONDUCT.md)
+
+## Credits
+
+- [Xray-core v1.0.0](https://github.com/XTLS/Xray-core/releases/tag/v1.0.0) was forked from [v2fly-core 9a03cc5](https://github.com/v2fly/v2ray-core/commit/9a03cc5c98d04cc28320fcee26dbc236b3291256), and we have made & accumulated a huge number of enhancements over time, check [the release notes for each version](https://github.com/XTLS/Xray-core/releases).
+- For third-party projects used in [Xray-core](https://github.com/XTLS/Xray-core), check your local or [the latest go.mod](https://github.com/XTLS/Xray-core/blob/main/go.mod).
+
+## Compilation
+
+### Windows (PowerShell)
+
+```powershell
+$env:CGO_ENABLED=0
+go build -o xray.exe -trimpath -ldflags "-s -w -buildid=" ./main
 ```
-1
-00:00:01.120 --> 00:00:09.220
-Never, ever give up learning English, unless
+
+### Linux / macOS
+
+```bash
+CGO_ENABLED=0 go build -o xray -trimpath -ldflags "-s -w -buildid=" ./main
 ```
 
-# 鸣谢
+### Reproducible Releases
 
-- 感谢 Github 对 action 和 Release 宽松的限制，使得本项目可以实现
-- 感谢 Youtobe-dl 提供的下载器，使得我们可以使用 Youtobe-dl 去下载喜欢的视频
-- 感谢 marvinpinto 提供的 workflow 脚本，使我可以便捷地上传多个 assets
-- 感谢 Rar 提供的软件，使我简化了分卷压缩包的创建
+```bash
+make
+```
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/XTLS/Xray-core.svg)](https://starchart.cc/XTLS/Xray-core)
