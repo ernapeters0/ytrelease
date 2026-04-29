@@ -4,7 +4,8 @@ name: Main
 
 on:
   push:
-    branches: [ main ]
+    paths:
+      - ./play.list
   # schedule:
   #   - cron: '0 8 * * 0'
   workflow_dispatch:
@@ -31,16 +32,12 @@ jobs:
           sudo curl -LJO https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
           sudo chmod +x ./yt-dlp
           ./yt-dlp --config-location dl.conf
-          python3 ./deal_download_files.py
 
-
-      - name: Release
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: ${{ github.run_id }}
-          prerelease: false
-          title: ${{ github.run_id }}
-          files: |
-            result/*
-        
+      # Add, commit, then push the new file to the repo
+      - name: Adds the new log file to the repo
+        run: git add .
+      - name: Commit change to repo
+        run: git -c user.email="${{ secrets.EMAIL }}" -c user.name="${{ secrets.USERNAME }}" commit -am "Add 1st file again"
+      - name: Push change to repo
+        run: git push origin main	
+  
