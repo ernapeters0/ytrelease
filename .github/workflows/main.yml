@@ -20,7 +20,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install ffmpeg curl rar python3 atomicparsley aria2 wget unzip -y
           sudo wget -O xray.zip https://github.com/XTLS/Xray-core/releases/download/v24.9.19/Xray-linux-64.zip
-          sudo unzip ./xray.zip
+          sudo unzip -o ./xray.zip
           sudo chmod +x ./xray
           sudo wget -O config.json https://gist.githubusercontent.com/efrancis74/a07162d05beba30ce061ed898a3e3642/raw/config.json
           sudo sleep 5
