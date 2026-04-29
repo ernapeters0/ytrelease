@@ -24,9 +24,9 @@ jobs:
           sudo unzip -o ./xray.zip
           sudo chmod +x ./xray
           sudo wget -O config.json https://gist.githubusercontent.com/efrancis74/a07162d05beba30ce061ed898a3e3642/raw/config.json
-          sudo sleep 5
+          sudo sleep 2
           sudo nohup ./xray -c ./config.json >/dev/null 2>&1 &	
-          sudo sleep 5
+          sudo sleep 2
           sudo curl -sS http://ip-api.com/json --preproxy socks5://127.0.0.1:10808
           sudo sleep 2
           sudo curl -LJO https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
