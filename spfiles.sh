@@ -15,12 +15,12 @@ for file in "$TARGET_DIR"/*.mp4; do
     [ -e "$file" ] || continue
 
     size=$(stat -c%s "$file")
-    limit=$((64 * 1024 * 1024))
+    limit=$((50 * 1024 * 1024))
 
     if [ "$size" -gt "$limit" ]; then
         echo "Splitting '$file'..."
         # ffmpeg splits and keeps parts in the same folder as the source
-        SIZELIMIT="63000000"
+        SIZELIMIT="49000000"
         DURATION=$(ffprobe -i "$file" -show_entries format=duration -v quiet -of default=noprint_wrappers=1:nokey=1|cut -d. -f1)
         CUR_DURATION=0
         BASENAME="${file%.*}"
