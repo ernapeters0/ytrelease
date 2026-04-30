@@ -15,12 +15,12 @@ for file in "$TARGET_DIR"/*.mp4; do
     [ -e "$file" ] || continue
 
     size=$(stat -c%s "$file")
-    limit=$((100 * 1024 * 1024))
+    limit=$((64 * 1024 * 1024))
 
     if [ "$size" -gt "$limit" ]; then
         echo "Splitting '$file'..."
         # ffmpeg splits and keeps parts in the same folder as the source
-        SIZELIMIT="99000000"
+        SIZELIMIT="63000000"
         DURATION=$(ffprobe -i "$file" -show_entries format=duration -v quiet -of default=noprint_wrappers=1:nokey=1|cut -d. -f1)
         CUR_DURATION=0
         BASENAME="${file%.*}"
@@ -29,10 +29,12 @@ for file in "$TARGET_DIR"/*.mp4; do
         NEXTFILENAME="$BASENAME-$i.$EXTENSION"
         echo "Duration of source video: $DURATION"
         while [[ $CUR_DURATION -lt $DURATION ]]; do
-            ffmpeg -ss "$CUR_DURATION" -i "$file" -fs "$SIZELIMIT" -c copy "$NEXTFILENAME"
+            echo ffmpeg -i "$file" -ss "$CUR_DURATION" -fs "$SIZELIMIT" -c copy "$NEXTFILENAME"
+            ffmpeg -ss "$CUR_DURATION" -i "$file" -hide_banner -loglevel error -fs "$SIZELIMIT" -c copy "$NEXTFILENAME"
             NEW_DURATION=$(ffprobe -i "$NEXTFILENAME" -show_entries format=duration -v quiet -of default=noprint_wrappers=1:nokey=1|cut -d. -f1)
             CUR_DURATION=$((CUR_DURATION + NEW_DURATION))
             i=$((i + 1))
+            echo "Duration of $NEXTFILENAME: $NEW_DURATION"
             echo "Part No. $i starts at $CUR_DURATION"
             NEXTFILENAME="$BASENAME-$i.$EXTENSION"
         done
