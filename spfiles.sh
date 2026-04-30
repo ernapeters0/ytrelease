@@ -20,7 +20,7 @@ for file in "$TARGET_DIR"/*.mp4; do
     if [ "$size" -gt "$limit" ]; then
         echo "Splitting '$file'..."
         # ffmpeg splits and keeps parts in the same folder as the source
-        ffmpeg -i "$file" -f segment -segment_chunk_size 99M -c copy "${file%.mp4}_part%03d.mp4"
+        ffmpeg -i "$file" -f segment -segment_chunk_size 50M -c copy "${file%.mp4}_part%03d.mp4"
         rm "$file" && echo "Successfully split and deleted: $(basename "$file")"
     else
         echo "Skipping '$(basename "$file")' (under 100MB)"
